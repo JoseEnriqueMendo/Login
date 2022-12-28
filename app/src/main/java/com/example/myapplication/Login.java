@@ -1,6 +1,10 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,16 +19,19 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     EditText txt_correo, txt_contra;
     Button btn_login;
+
+    String correoG;
+    String token;
+    String mensaje="Erro";
+    boolean estado=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             //ObtenerUsuario("dinofiesta123@gmail.com");
             try {
                 Login(txt_correo.getText().toString(),txt_contra.getText().toString());
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
@@ -46,29 +54,11 @@ public class MainActivity extends AppCompatActivity {
     });
     }
 
-    private void ObtenerUsuario(String correo){
-    String  url = "https://7jnsf5isq8.execute-api.us-east-1.amazonaws.com/usuario/obtener/"+correo;
-        StringRequest postResquest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    txt_correo.setText(jsonObject.getString("message"));
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("error",error.getMessage());
-            }
-        });
-        Volley.newRequestQueue(this).add(postResquest);
-    }
+
 
     private void Login(final String correo, final String  contra) throws JSONException{
-
+        estado=false;
+        mensaje="Request fallido";
         String  url = "https://7jnsf5isq8.execute-api.us-east-1.amazonaws.com/usuario/iniciarSesión";
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("correo",correo);
@@ -76,11 +66,24 @@ public class MainActivity extends AppCompatActivity {
         final String requestBody = jsonObject.toString();
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
                 new Response.Listener<JSONObject>() {
+                    @SuppressLint("NotConstructor")
                     @Override
                     public void onResponse(JSONObject response) {
 
-                        //realiza procedimiento
-                        Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+
+                        try {
+                            mensaje=response.get("message").toString();
+                            correoG=correo;
+                            estado=response.getBoolean("success");
+                            Toast.makeText(Login.this, mensaje, Toast.LENGTH_LONG).show();
+                            if(estado){
+                                JSONObject objeto =  response.getJSONObject("data");
+                                token=objeto.getString("token");
+                                cambiarVerPerfil(correoG);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
 
                     }
                 }, new Response.ErrorListener() {
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 //handle the error
-                Toast.makeText(MainActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "An error occurred", Toast.LENGTH_SHORT).show();
                 error.printStackTrace();
             }
         });
@@ -96,6 +99,14 @@ public class MainActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(jsonRequest);
     }
 
+
+    public void cambiarVerPerfil(final String correo){
+        Intent i= new Intent(Login.this,VerPerfil.class);
+        Bundle miBundle= new Bundle();
+        miBundle.putString("correo",correo);
+        i.putExtras(miBundle);
+        startActivity(i);
+    }
 
 
 
