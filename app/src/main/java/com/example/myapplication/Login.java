@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity {
 
     EditText txt_correo, txt_contra;
-    Button btn_login;
+    Button btn_login,bton_Registrarse;
 
     String correoG;
     String token;
@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
         txt_correo= findViewById(R.id.txt_correo);
         txt_contra=findViewById(R.id.txt_contra);
         btn_login= findViewById(R.id.btn_login);
+        bton_Registrarse=findViewById(R.id.bton_Registrarse);
     btn_login.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -52,6 +53,20 @@ public class Login extends AppCompatActivity {
             }
         }
     });
+
+        bton_Registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ObtenerUsuario("dinofiesta123@gmail.com");
+
+                    cambiarRegistro();
+
+
+            }
+        });
+
+
+
     }
 
 
@@ -105,6 +120,12 @@ public class Login extends AppCompatActivity {
         Bundle miBundle= new Bundle();
         miBundle.putString("correo",correo);
         i.putExtras(miBundle);
+        startActivity(i);
+    }
+
+
+    public void cambiarRegistro(){
+        Intent i= new Intent(Login.this,Registro.class);
         startActivity(i);
     }
 
