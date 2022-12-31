@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,6 +24,7 @@ public class Registro extends AppCompatActivity {
 
     EditText txt_registro_sexo,txt_registro_contra,txt_registro_nombres,txt_registro_nombreUsuario,txt_registro_dni,txt_registro_correo,txt_registro_fecha,txt_registro_celular;
     Button bton_Registro_registrarse;
+    ImageButton bton_registro_volver;
     String mensaje="Erro";
     boolean estado=false;
 
@@ -39,6 +41,7 @@ public class Registro extends AppCompatActivity {
         txt_registro_fecha =findViewById(R.id.txt_registro_fecha);
         txt_registro_celular=findViewById(R.id.txt_registro_celular);
         bton_Registro_registrarse= findViewById(R.id.bton_Registro_registrarse);
+        bton_registro_volver= findViewById(R.id.bton_registro_volver);
         bton_Registro_registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,12 +56,20 @@ public class Registro extends AppCompatActivity {
             }
         });
 
+        bton_registro_volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cambiarLogin();
+            }
+        });
+
     }
 
     public void cambiarLogin(){
         Intent i= new Intent(Registro.this,Login.class);
         startActivity(i);
     }
+
 
 
     private void Login(final String correo, final String  contra,final String  fecha,final String  sexo,final String  nombre,final String  nombreUsuario,final String  celular,final String  dni) throws JSONException{
