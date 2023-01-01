@@ -39,10 +39,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.152"
+            app:layout_constraintHorizontal_bias="0.033"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.139" />
+            app:layout_constraintVertical_bias="0.171" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -83,6 +83,34 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.018" />
 
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:contentDescription="ss"
+            android:src="@mipmap/premiere"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.236" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="ss"
+            android:scaleType="matrix"
+            android:src="@mipmap/bundesliga"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.944"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.231" />
+
         <TextView
             android:id="@+id/txt_home_"
             android:layout_width="wrap_content"
@@ -93,21 +121,71 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.321" />
+            app:layout_constraintVertical_bias="0.355" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recicle_home_partidos"
-            android:layout_width="366dp"
-            android:layout_height="366dp"
-            android:layout_marginStart="20dp"
-            android:background="#FFFBFB"
+            android:layout_width="371dp"
+            android:layout_height="210dp"
+            android:layout_marginStart="12dp"
+            android:background="#15202B"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.735" />
+            app:layout_constraintVertical_bias="0.499">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recicle_home_partidos1"
+            android:layout_width="370dp"
+            android:layout_height="255dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.292"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.886" />
+
+        <EditText
+            android:id="@+id/txt_registro_nombres2"
+            android:layout_width="245dp"
+            android:layout_height="53dp"
+            android:background="#253341"
+            android:ems="10"
+            android:hint="Buscar"
+            android:inputType="textPersonName"
+            android:textAlignment="textStart"
+            android:textColor="#AAB8C2"
+            android:textColorHint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.379"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="48dp"
+            android:layout_height="46dp"
+            android:background="#15202B"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_search"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="91dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="125dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/laligaes"
+            tools:layout_editor_absoluteX="12dp"
+            tools:layout_editor_absoluteY="187dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
