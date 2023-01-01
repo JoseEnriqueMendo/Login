@@ -31,7 +31,7 @@ public class NavBar extends AppCompatActivity {
             Bundle args= new Bundle();
             args.putString("correo", correo);
             verPerfil.setArguments(args);
-
+            home.setArguments(args);
         }else {
             Toast.makeText(NavBar.this, "no hay parametros", Toast.LENGTH_LONG).show();
         }

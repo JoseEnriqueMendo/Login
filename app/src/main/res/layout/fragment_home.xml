@@ -13,6 +13,50 @@
 
 
         <TextView
+            android:id="@+id/txt_home_creditos"
+            android:layout_width="52dp"
+            android:layout_height="28dp"
+            android:background="#15202B"
+            android:contentDescription="moneda"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.86"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029" />
+
+        <TextView
+            android:id="@+id/txt_home_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ligas"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.152"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.139" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="29dp"
+            android:layout_height="33dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.958"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.02"
+            app:srcCompat="@mipmap/moneda" />
+
+        <TextView
             android:id="@+id/textView24"
             android:layout_width="415dp"
             android:layout_height="3dp"
@@ -25,7 +69,7 @@
             app:layout_constraintVertical_bias="0.063" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/txt_home_nombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hola, ...."
@@ -38,6 +82,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.018" />
+
+        <TextView
+            android:id="@+id/txt_home_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partidos"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.169"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.321" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recicle_home_partidos"
+            android:layout_width="366dp"
+            android:layout_height="366dp"
+            android:layout_marginStart="20dp"
+            android:background="#FFFBFB"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.735" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
