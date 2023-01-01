@@ -170,22 +170,28 @@
 
         <ImageButton
             android:id="@+id/imageButton4"
-            android:layout_width="48dp"
-            android:layout_height="46dp"
+            android:layout_width="59dp"
+            android:layout_height="56dp"
             android:background="#15202B"
+            android:contentDescription="ss"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_search"
             tools:layout_editor_absoluteX="329dp"
-            tools:layout_editor_absoluteY="91dp" />
+            tools:layout_editor_absoluteY="81dp" />
 
         <ImageButton
             android:id="@+id/imageButton5"
-            android:layout_width="125dp"
-            android:layout_height="100dp"
+            android:layout_width="134dp"
+            android:layout_height="102dp"
+            android:contentDescription="ss"
             android:scaleType="fitCenter"
             android:src="@mipmap/laligaes"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="187dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.041"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.236" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
