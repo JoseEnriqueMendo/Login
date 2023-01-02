@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -100,7 +102,7 @@ public class Home extends Fragment {
         String correo = getArguments().getString("correo");
         txt_home_creditos= root.findViewById(R.id.txt_home_creditos);
         txt_home_nombreUsuario= root.findViewById(R.id.txt_home_nombreUsuario);
-           listaPartidos=new ArrayList<>();
+        listaPartidos=new ArrayList<>();
         listaPartidos2=new ArrayList<>();
         rv1=root.findViewById(R.id.recicle_home_partidos);
         rv2=root.findViewById(R.id.recicle_home_partidos1);
@@ -143,72 +145,88 @@ public class Home extends Fragment {
 
                         JSONArray arreglo = new JSONArray(v);
                    for (int i=0;i<10;i++) {
-                        JSONObject objetoGeneral = new JSONObject(arreglo.get(i).toString());
-                        JSONObject objetoFixture = new JSONObject(objetoGeneral.getString("fixture"));
-                        JSONObject objetoLiga = new JSONObject(objetoGeneral.getString("league"));
-                        JSONObject objetoTeams = new JSONObject(objetoGeneral.getString("teams"));
-                        JSONObject objetoGoals = new JSONObject(objetoGeneral.getString("goals"));
+                       JSONObject objetoGeneral = new JSONObject(arreglo.get(i).toString());
+                       JSONObject objetoFixture = new JSONObject(objetoGeneral.getString("fixture"));
+                       JSONObject objetoLiga = new JSONObject(objetoGeneral.getString("league"));
+                       JSONObject objetoTeams = new JSONObject(objetoGeneral.getString("teams"));
+                       JSONObject objetoGoals = new JSONObject(objetoGeneral.getString("goals"));
 
-                        JSONObject objetoVenue = new JSONObject(objetoFixture.getString("venue"));
-                        JSONObject objetoStatus = new JSONObject(objetoFixture.getString("status"));
-                        JSONObject objetoLocal = new JSONObject(objetoTeams.getString("home"));
-                        JSONObject objetoVisitante = new JSONObject(objetoTeams.getString("away"));
-
-
+                       JSONObject objetoVenue = new JSONObject(objetoFixture.getString("venue"));
+                       JSONObject objetoStatus = new JSONObject(objetoFixture.getString("status"));
+                       JSONObject objetoLocal = new JSONObject(objetoTeams.getString("home"));
+                       JSONObject objetoVisitante = new JSONObject(objetoTeams.getString("away"));
 
 
-                        int idFixture = objetoFixture.getInt("id");
-                        String timeStamp = objetoFixture.getString("timestamp");
-                        int idVenue = objetoVenue.getInt("id");
-                        String nameVenue = objetoVenue.getString("name");
-                        String longStatus = objetoStatus.getString("long");
-                        int idLiga = objetoLiga.getInt("id");
-                        String nameLiga = objetoLiga.getString("name");
-                        int idLocal = objetoLocal.getInt("id");
-                        String nameLocal = objetoLocal.getString("name");
-                        String logoLocal = objetoLocal.getString("logo");
-                        boolean estadoLocal=false ;
-                            try {
-                                estadoLocal = objetoLocal.getBoolean("winner");
-                            }catch ( JSONException e){
-                                estadoLocal =false;
+                       int idFixture = objetoFixture.getInt("id");
+                       String timeStamp = objetoFixture.getString("timestamp");
+                       int idVenue = objetoVenue.getInt("id");
+                       String nameVenue = objetoVenue.getString("name");
+                       String longStatus = objetoStatus.getString("long");
+                       int idLiga = objetoLiga.getInt("id");
+                       String nameLiga = objetoLiga.getString("name");
+                       int idLocal = objetoLocal.getInt("id");
+                       String nameLocal = objetoLocal.getString("name");
+                       String logoLocal = objetoLocal.getString("logo");
+                       boolean estadoLocal=false ;
+                       try {
+                           estadoLocal = objetoLocal.getBoolean("winner");
+                       }catch ( JSONException e){
+                           estadoLocal =false;
 
-                            }
-
-
-                            int idVisitante = objetoVisitante.getInt("id");
-                            String nameVisitante = objetoVisitante.getString("name");
-                            String logoVisitante = objetoVisitante.getString("logo");
-
-                            boolean estadoVisitante=false ;
-                            try {
-                                estadoVisitante = objetoVisitante.getBoolean("winner");
-                            }catch ( JSONException e){
-                                estadoLocal =false;
-
-                            }
-
-                            int golesLocal = 0;
-
-                            try {
-                                golesLocal = objetoGoals.getInt("home");
-                            }catch ( JSONException e){
-                               golesLocal = 0;
-                            }
-
-                            int golesoVisitante = 0;
-
-                            try {
-                                golesoVisitante  = objetoGoals.getInt("away");
-                            }catch ( JSONException e){
-                                golesoVisitante = 0;
-                            }
+                       }
+                       String cityVenue= objetoVenue.getString("city");
 
 
+                       String refereeFixture="Por definir";
+                       try{
+                           refereeFixture=objetoFixture.getString("referee");
+                       }catch (JSONException e){
+                           refereeFixture= "Por definir";
+                       }
+                       String countryLigue = objetoLiga.getString("country");
+                       int elapsedstatus = 0;
+                       try {
+                           elapsedstatus= objetoStatus.getInt("elapsed");
+                       }catch (JSONException e){
+                           elapsedstatus=0;
+                       }
+                       int idVisitante = objetoVisitante.getInt("id");
+                       String nameVisitante = objetoVisitante.getString("name");
+                       String logoVisitante = objetoVisitante.getString("logo");
 
-                            Partido p = new Partido(idFixture, timeStamp, idVenue, nameVenue, longStatus, idLiga, nameLiga, idLocal, nameLocal, logoLocal, estadoLocal, idVisitante, nameVisitante, logoVisitante, estadoVisitante, golesLocal, golesoVisitante);
+                       boolean estadoVisitante=false ;
+                       try {
+                           estadoVisitante = objetoVisitante.getBoolean("winner");
+                       }catch ( JSONException e){
+                           estadoLocal =false;
 
-                            listaPartidos.add(p);
+                       }
+
+                       int golesLocal = 0;
+
+                       try {
+                           golesLocal = objetoGoals.getInt("home");
+                       }catch ( JSONException e){
+                           golesLocal = 0;
+                       }
+
+                       int golesoVisitante = 0;
+
+                       try {
+                           golesoVisitante  = objetoGoals.getInt("away");
+                       }catch ( JSONException e){
+                           golesoVisitante = 0;
+                       }
+
+
+
+                       Partido p = new Partido(idFixture, timeStamp, idVenue, nameVenue, longStatus, idLiga, nameLiga, idLocal, nameLocal, logoLocal, estadoLocal, idVisitante, nameVisitante, logoVisitante, estadoVisitante, golesLocal, golesoVisitante);
+                       p.setCiudad(cityVenue);
+                       p.setReferee(refereeFixture);
+                       p.setPais_league(countryLigue);
+                       p.setTime_fixture(elapsedstatus);
+
+                       listaPartidos.add(p);
                             adaptadorUsuario.notifyItemRangeInserted(listaPartidos.size(), 1);
                             }
 
@@ -265,8 +283,6 @@ public class Home extends Fragment {
                         JSONObject objetoVisitante = new JSONObject(objetoTeams.getString("away"));
 
 
-
-
                         int idFixture = objetoFixture.getInt("id");
                         String timeStamp = objetoFixture.getString("timestamp");
                         int idVenue = objetoVenue.getInt("id");
@@ -284,8 +300,22 @@ public class Home extends Fragment {
                             estadoLocal =false;
 
                         }
+                        String cityVenue= objetoVenue.getString("city");
 
 
+                        String refereeFixture="Por definir";
+                        try{
+                            refereeFixture=objetoFixture.getString("referee");
+                        }catch (JSONException e){
+                            refereeFixture= "Por definir";
+                        }
+                        String countryLigue = objetoLiga.getString("country");
+                        int elapsedstatus = 0;
+                        try {
+                            elapsedstatus= objetoStatus.getInt("elapsed");
+                        }catch (JSONException e){
+                            elapsedstatus=0;
+                        }
                         int idVisitante = objetoVisitante.getInt("id");
                         String nameVisitante = objetoVisitante.getString("name");
                         String logoVisitante = objetoVisitante.getString("logo");
@@ -317,6 +347,10 @@ public class Home extends Fragment {
 
 
                         Partido p = new Partido(idFixture, timeStamp, idVenue, nameVenue, longStatus, idLiga, nameLiga, idLocal, nameLocal, logoLocal, estadoLocal, idVisitante, nameVisitante, logoVisitante, estadoVisitante, golesLocal, golesoVisitante);
+                        p.setCiudad(cityVenue);
+                        p.setReferee(refereeFixture);
+                        p.setPais_league(countryLigue);
+                        p.setTime_fixture(elapsedstatus);
 
                         listaPartidos2.add(p);
                         adaptadorUsuario2.notifyItemRangeInserted(listaPartidos2.size(), 1);
@@ -405,7 +439,7 @@ public class Home extends Fragment {
             public AdaptadorUsuarioHolder(@NonNull View itemView) {
                 super(itemView);
                 txt_partido_fecha=itemView.findViewById(R.id.txt_partido_fecha);
-                txt_partido_hora=itemView.findViewById(R.id.txt_partido_hora);
+
                 txt_partido_local=itemView.findViewById(R.id.txt_partido_local);
                 txt_partido_visitante=itemView.findViewById(R.id.txt_partido_visitante);
                 bton_partido_detalles=itemView.findViewById(R.id.bton_partido_detalles);
@@ -414,20 +448,37 @@ public class Home extends Fragment {
                 txt_partido_liga=itemView.findViewById(R.id.txt_partido_liga);
 
 
+
             }
 
             public void imprimir(int position) {
                     txt_partido_visitante.setText(listaPartidos.get(position).getAway_name());
                     txt_partido_local.setText(listaPartidos.get(position).getHome_name());
                     int stamp= Integer.parseInt(listaPartidos.get(position).getTimestamp_fixture());
-                    //long millis = stamp * 1000;
+
                 LocalDateTime dateTime = LocalDateTime.ofEpochSecond(stamp, 0, ZoneOffset.of("-05:00"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE,MMMM d,yyyy h:mm,a", Locale.forLanguageTag("es-PE"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE,MMMM d, h:mm,a", Locale.forLanguageTag("es-PE"));
                 String formattedDate = dateTime.format(formatter);
                 txt_partido_fecha.setText(formattedDate);
-                txt_partido_liga.setText("Liga Española");
+                txt_partido_liga.setText(listaPartidos.get(position).name_league);
                     recuperarImagen(listaPartidos.get(position).getHome_logo(),img_partido_local);
                     recuperarImagen(listaPartidos.get(position).getAway_logo(),img_partido_visitante);
+                bton_partido_detalles.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle datosAEnviar = new Bundle();
+                        datosAEnviar.putParcelable("partido", listaPartidos.get(position));
+                        Fragment fragmento = new DetallesPartido();
+                        fragmento.setArguments(datosAEnviar);
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frameContainer, fragmento);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                });
+
+
             }
 
             private void recuperarImagen(String foto, ImageView iv) {
@@ -474,7 +525,6 @@ public class Home extends Fragment {
             public AdaptadorUsuarioHolder(@NonNull View itemView) {
                 super(itemView);
                 txt_partido_fecha=itemView.findViewById(R.id.txt_partido_fecha);
-                txt_partido_hora=itemView.findViewById(R.id.txt_partido_hora);
                 txt_partido_local=itemView.findViewById(R.id.txt_partido_local);
                 txt_partido_visitante=itemView.findViewById(R.id.txt_partido_visitante);
                 bton_partido_detalles=itemView.findViewById(R.id.bton_partido_detalles);
@@ -491,12 +541,27 @@ public class Home extends Fragment {
                 int stamp= Integer.parseInt(listaPartidos2.get(position).getTimestamp_fixture());
                 //long millis = stamp * 1000;
                 LocalDateTime dateTime = LocalDateTime.ofEpochSecond(stamp, 0, ZoneOffset.of("-05:00"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE,MMMM d,yyyy h:mm,a", Locale.forLanguageTag("es-PE"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE,MMMM d, h:mm,a", Locale.forLanguageTag("es-PE"));
                 String formattedDate = dateTime.format(formatter);
                 txt_partido_fecha.setText(formattedDate);
-                txt_partido_liga.setText("Premier League");
+                txt_partido_liga.setText(listaPartidos2.get(position).name_league);
                 recuperarImagen(listaPartidos2.get(position).getHome_logo(),img_partido_local);
                 recuperarImagen(listaPartidos2.get(position).getAway_logo(),img_partido_visitante);
+                bton_partido_detalles.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle datosAEnviar = new Bundle();
+                        datosAEnviar.putParcelable("partido", listaPartidos2.get(position));
+                        Fragment fragmento = new DetallesPartido();
+                        fragmento.setArguments(datosAEnviar);
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frameContainer, fragmento);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                });
+
             }
 
             private void recuperarImagen(String foto, ImageView iv) {

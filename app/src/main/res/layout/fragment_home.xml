@@ -176,8 +176,12 @@
             android:contentDescription="ss"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_search"
-            tools:layout_editor_absoluteX="329dp"
-            tools:layout_editor_absoluteY="81dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.92"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
 
         <ImageButton
             android:id="@+id/imageButton5"

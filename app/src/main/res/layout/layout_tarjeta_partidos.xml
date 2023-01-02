@@ -46,8 +46,8 @@
 
         <TextView
             android:id="@+id/txt_partido_fecha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="122dp"
+            android:layout_height="14dp"
             android:layout_marginTop="96dp"
             android:fontFamily="sans-serif-condensed"
             android:text="fecha"
@@ -55,22 +55,7 @@
             android:textSize="10sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.159"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txt_partido_hora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="hora"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.535"
+            app:layout_constraintHorizontal_bias="0.421"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

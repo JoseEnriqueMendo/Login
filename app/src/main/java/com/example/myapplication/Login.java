@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
                             mensaje=response.get("message").toString();
                             correoG=correo;
                             estado=response.getBoolean("success");
-                            Toast.makeText(Login.this, mensaje, Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, mensaje, Toast.LENGTH_SHORT).show();
                             if(estado){
                                 JSONObject objeto =  response.getJSONObject("data");
                                 token=objeto.getString("token");
